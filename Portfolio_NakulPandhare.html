@@ -1,121 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Nakul Pandhare – Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #f4f7fa; color: #222; }
-        header { background: #3275be; color: #fff; padding: 32px 24px; text-align: center; }
-        .container { max-width: 900px; margin: 20px auto; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border-radius: 6px; }
-        .section { padding: 28px 32px; border-bottom: 1px solid #e6e6e6; }
-        .section:last-child { border-bottom: none; }
-        h1 { margin: 0; font-size: 2.2em; }
-        h2 { color: #3275be; margin-top: 0; }
-        .info { margin-top: 16px; font-size: 1em; }
-        .contact-list { list-style: none; padding: 0; margin: 0 0 12px 0; }
-        .contact-list li { margin-bottom: 6px; }
-        .skills, .strengths { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0; }
-        .skills span, .strengths span { background: #eaf2fb; padding: 6px 14px; border-radius: 16px; font-size: 0.97em; }
-        .exp-title { font-weight: 600; margin-bottom: 3px; }
-        .project { margin-bottom: 14px; }
+        :root {
+            --bg: #0f172a;
+            --bg-card: #020617;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.15);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --border-subtle: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #1e3a8a 0, #020617 45%, #020617 100%);
+            color: var(--text-main);
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Top navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(16px);
+            background: linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.6));
+            border-bottom: 1px solid rgba(148,163,184,0.15);
+        }
+
+        .nav-inner {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-name {
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .nav-links a {
+            margin-left: 18px;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #38bdf8, #a855f7);
+            transition: width 0.25s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Layout */
+        .page {
+            max-width: 1040px;
+            margin: 24px auto 40px auto;
+            padding: 0 20px 40px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr);
+            gap: 26px;
+        }
+
+        @media (max-width: 840px) {
+            .page {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Left column (intro card) */
+        .card {
+            background: radial-gradient(circle at top left, rgba(56,189,248,0.18), rgba(15,23,42,0.98));
+            border-radius: 18px;
+            padding: 22px 22px 20px;
+            border: 1px solid rgba(148,163,184,0.25);
+            box-shadow: 0 22px 45px rgba(15,23,42,0.75);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background:
+                radial-gradient(circle at 10% 0%, rgba(56,189,248,0.10), transparent 55%),
+                radial-gradient(circle at 90% 100%, rgba(168,85,247,0.16), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+            transform: scale(1.03);
+        }
+
+        .tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.4);
+            background: rgba(15,23,42,0.7);
+            color: var(--text-muted);
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 0 6px rgba(34,197,94,0.25);
+        }
+
+        h1 {
+            margin: 14px 0 4px;
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.94rem;
+            max-width: 480px;
+        }
+
+        .chips-row {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip {
+            font-size: 0.78rem;
+            padding: 5px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.5);
+            background: rgba(15,23,42,0.8);
+        }
+
+        .contact-grid {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(148,163,184,0.3);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 16px;
+            font-size: 0.84rem;
+        }
+
+        @media (max-width: 840px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-label {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* Fun element: floating badges */
+        .float-badge {
+            position: absolute;
+            right: 18px;
+            top: 18px;
+            padding: 6px 11px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            background: rgba(15,23,42,0.85);
+            border: 1px solid rgba(148,163,184,0.45);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .float-badge span {
+            font-size: 0.8rem;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Right column sections */
+        .section {
+            background: linear-gradient(135deg, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
+            border-radius: 16px;
+            padding: 18px 20px 16px;
+            border: 1px solid rgba(148,163,184,0.2);
+            margin-bottom: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: "";
+            position: absolute;
+            inset: -30%;
+            background: radial-gradient(circle at 0% 0%, rgba(56,189,248,0.16), transparent 55%);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            pointer-events: none;
+        }
+
+        .section:hover::before {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .section h2 {
+            margin: 0;
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .section-pill {
+            font-size: 0.7rem;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: rgba(15,23,42,1);
+            border: 1px solid rgba(148,163,184,0.35);
+            color: var(--text-muted);
+        }
+
+        .timeline-item {
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            font-size: 0.94rem;
+        }
+
+        .timeline-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+        }
+
+        .timeline-body {
+            font-size: 0.86rem;
+            color: #d1d5db;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 6px;
+        }
+
+        .skill-tag {
+            font-size: 0.78rem;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(15,23,42,1);
+            border: 1px solid rgba(148,163,184,0.4);
+        }
+
+        /* Interactive skills bar */
+        .skill-bar {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-pill {
+            position: relative;
+            padding: 5px 11px;
+            border-radius: 999px;
+            background: rgba(15,23,42,1);
+            border: 1px solid rgba(148,163,184,0.4);
+            font-size: 0.8rem;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .skill-pill::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(56,189,248,0.16), transparent 50%, rgba(56,189,248,0.2));
+            transform: translateX(-100%);
+            transition: transform 0.35s ease-out;
+            opacity: 0.9;
+        }
+
+        .skill-pill:hover::after {
+            transform: translateX(0%);
+        }
+
+        /* Project grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 10px;
+        }
+
+        @media (max-width: 900px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 14px;
+            padding: 12px 12px 11px;
+            background: radial-gradient(circle at top left, rgba(56,189,248,0.16), rgba(15,23,42,0.98));
+            border: 1px solid rgba(148,163,184,0.3);
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(15,23,42,0.7));
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        .project-title {
+            position: relative;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .project-text {
+            position: relative;
+            margin-top: 4px;
+            font-size: 0.82rem;
+            color: #d1d5db;
+        }
+
+        .project-chip {
+            position: relative;
+            display: inline-block;
+            margin-top: 6px;
+            font-size: 0.74rem;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(148,163,184,0.5);
+        }
+
+        /* Footer note */
+        .note {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Nakul Pandhare</h1>
-        <div class="info">
-            Embedded Systems & Robotics Engineer<br>
-            Based in Stuttgart, Germany & Nagpur, India
+    <div class="navbar">
+        <div class="nav-inner">
+            <div class="nav-name">Nakul Pandhare · Embedded Systems</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#education">Education</a>
+            </div>
         </div>
-        <ul class="contact-list">
-            <li>Email: <a href="mailto:nakulpandhare23@gmail.com" style="color:#fff;">nakulpandhare23@gmail.com</a></li>
-            <li>LinkedIn: <a href="https://linkedin.com/in/nakul-pandhare" style="color:#fff;">nakul-pandhare</a></li>
-            <li>GitHub: <a href="https://github.com/nakulpandhare" style="color:#fff;">nakulpandhare</a></li>
-            <li>Phone: +49 176 8596 3167</li>
-        </ul>
-    </header>
-    <div class="container">
-        <section class="section">
-            <h2>Professional Summary</h2>
-            <p>
-                Embedded systems and robotics engineer with hands-on expertise in ROS, BLE development, and microcontroller/microprocessor programming. Focused on automation, intelligent connectivity, and autonomous navigation. Skilled in Python, C/C++, and ROS2, with a strong interest in developing safe, robust, and intelligent embedded solutions.
-            </p>
-        </section>
-        <section class="section">
-            <h2>Education</h2>
-            <ul>
-                <li><strong>M.Sc., Information Technology</strong>, University of Stuttgart, Germany (2022–Present) – Major: Embedded Systems</li>
-                <li><strong>B.E., Electronics & Telecommunications Engineering</strong>, G.H. Raisoni College of Engineering, Nagpur, India (2018–2022)</li>
-                <li><strong>German Course B1</strong> in progress (2025)</li>
-            </ul>
-        </section>
-        <section class="section">
-            <h2>Skills</h2>
-            <div class="skills">
-                <span>Python</span>
-                <span>C/C++</span>
-                <span>ROS & ROS2</span>
-                <span>Bluetooth LE</span>
-                <span>Linux</span>
-                <span>Embedded Systems</span>
-                <span>MATLAB</span>
-                <span>Simulation</span>
-                <span>Software Development</span>
-            </div>
-            <h2>Strengths</h2>
-            <div class="strengths">
-                <span>Adaptability</span>
-                <span>Learning Agility</span>
-                <span>Cross-Functional Collaboration</span>
-                <span>Technical Documentation</span>
-                <span>Problem Solving</span>
-                <span>Feasibility Assessment</span>
-                <span>Project Management</span>
-            </div>
-        </section>
-        <section class="section">
-            <h2>Experience</h2>
-            <div>
-                <div class="exp-title">Andreas Stihl AG & Co. KG, Waiblingen, Germany – Werkstudent Praktikant (2024–Present)</div>
-                Mastered BLE workflows, developed testing applications on Nordic platforms, integrated BLE with Android Kotlin for OTA updates, and documented technical processes.
-            </div>
-            <div>
-                <div class="exp-title">BEC Robotics GmbH, Pfullingen, Germany – Werkstudent Roboticist (2023–2024)</div>
-                Developed and tested AGV systems using ROS2; designed interface layers bridging industrial robots and localization tools; collaborated on automation solutions.
-            </div>
-            <div>
-                <div class="exp-title">ISW Stuttgart Institute for Control Technology – University Research Assistant (2023)</div>
-                Programmed PLC-driven gantry laser scanners for automated inspection, optimized precision algorithms, supported production deployment.
-            </div>
-            <div>
-                <div class="exp-title">Technoventor Innovations Pvt. Ltd, Nagpur – Embedded Product Development Intern (2021–2022)</div>
-                Programmed microcontrollers, integrated sensor-actuator systems, prototyped automation solutions for railway wagon door detection and remote monitoring.
-            </div>
-        </section>
-        <section class="section">
-            <h2>Academic Projects</h2>
-            <div class="project">
-                <strong>Online Dynamic Risk Assessment for Robot Dog Navigation</strong><br>
-                Designed a multi-layer real-time risk framework for mobile robots using Python and computer vision, enabling dynamic obstacle detection and path feasibility evaluation.
-            </div>
-            <div class="project">
-                <strong>Mobile Robots Risk Assessment Framework</strong><br>
-                Advanced probabilistic roadmap planner for navigation, integrated dynamic obstacles tracking in ROS-based frameworks.
-            </div>
-            <div class="project">
-                <strong>Multipurpose Agro System using Swarm Intelligence</strong><br>
-                Built autonomous agricultural robot for seeding, watering, and surveillance, integrating robotics, IoT, and custom firmware on ATmega microcontrollers.
-            </div>
-        </section>
-        <section class="section">
-            <h2>Languages</h2>
-            <ul>
-                <li>English – Fluent</li>
-                <li>German – Intermediate (A2/B1)</li>
-                <li>Hindi – Native</li>
-            </ul>
-        </section>
     </div>
+
+    <main class="page">
+        <!-- Left column -->
+        <section class="card" id="about">
+            <div class="float-badge">
+                ⚙️ <span>Robotics · Embedded · BLE</span>
+            </div>
+            <div class="tagline">
+                <span class="dot"></span>
+                Open to embedded & robotics roles in EU/India
+            </div>
+            <h1>Nakul Pandhare</h1>
+            <p class="subtitle">
+                Embedded systems and robotics engineer with hands-on experience in ROS, BLE, and microcontroller/microprocessor programming, focused on automation, intelligent connectivity, and autonomous navigation.
+            </p>
+
+            <div class="chips-row">
+                <div class="chip">ROS · ROS2</div>
+                <div class="chip">Bluetooth LE</div>
+                <div class="chip">Python · C/C++</div>
+                <div class="chip">Embedded Systems</div>
+                <div class="chip">Autonomous Navigation</div>
+            </div>
+
+            <div class="contact-grid">
+                <div>
+                    <div class="contact-label">Email</div>
+                    <div><a href="mailto:nakulpandhare23@gmail.com">nakulpandhare23@gmail.com</a></div>
+                </div>
+                <div>
+                    <div class="contact-label">Phone</div>
+                    <div>+49 176 8596 3167</div>
+                </div>
+                <div>
+                    <div class="contact-label">LinkedIn</div>
+                    <div><a href="https://linkedin.com/in/nakul-pandhare" target="_blank">/in/nakul-pandhare</a></div>
+                </div>
+                <div>
+                    <div class="contact-label">GitHub</div>
+                    <div><a href="https://github.com/nakulpandhare" target="_blank">@nakulpandhare</a></div>
+                </div>
+                <div>
+                    <div class="contact-label">Location</div>
+                    <div>Stuttgart, Germany · Nagpur, India</div>
+                </div>
+                <div>
+                    <div class="contact-label">Availability</div>
+                    <div>Eligible to work in Germany & India · Immediate start</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right column -->
+        <section class="right">
+            <!-- Experience -->
+            <div class="section" id="experience">
+                <div class="section-header">
+                    <h2>Experience</h2>
+                    <div class="section-pill">Hands-on industry projects</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Werkstudent Praktikant · Andreas Stihl AG & Co. KG</div>
+                    <div class="timeline-meta">Waiblingen, Germany · 07/2024 – Present</div>
+                    <p class="timeline-body">
+                        Built and tested BLE communication workflows on Nordic nRF52/nRF54 platforms, implemented secure pairing, data exchange, and OTA update validation using Python and C/C++.
+                    </p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Bluetooth LE</span>
+                        <span class="skill-tag">Nordic nRF52/nRF54</span>
+                        <span class="skill-tag">Zephyr RTOS</span>
+                        <span class="skill-tag">Android (Kotlin)</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Werkstudent Roboticist · BEC Robotics GmbH</div>
+                    <div class="timeline-meta">Pfullingen, Germany · 11/2023 – 04/2024</div>
+                    <p class="timeline-body">
+                        Contributed to ROS2-based AGV development, designed C++ interface layers between industrial mobile robots and external localization/simulation tools, and conducted end-to-end navigation tests.
+                    </p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">ROS2</span>
+                        <span class="skill-tag">AGV Systems</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">Simulation</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Research Assistant (HiWi) · ISW, University of Stuttgart</div>
+                    <div class="timeline-meta">Stuttgart, Germany · 01/2023 – 09/2023</div>
+                    <p class="timeline-body">
+                        Programmed and optimized PLC-driven gantry laser scanners using Beckhoff TwinCAT to improve precision in automated inspection workflows and evaluated compensation algorithms via simulation and hardware tests.
+                    </p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PLC</span>
+                        <span class="skill-tag">TwinCAT</span>
+                        <span class="skill-tag">Automation</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Embedded Product Development Intern · Technoventor Innovations</div>
+                    <div class="timeline-meta">Nagpur, India · 12/2021 – 06/2022</div>
+                    <p class="timeline-body">
+                        Developed microcontroller-based prototypes for railway wagon door detection and remote monitoring, integrating sensors, RF communication, and real-time data streams.
+                    </p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Embedded C</span>
+                        <span class="skill-tag">Sensors & Actuators</span>
+                        <span class="skill-tag">RF Communication</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects -->
+            <div class="section" id="projects">
+                <div class="section-header">
+                    <h2>Academic Projects</h2>
+                    <div class="section-pill">Selected highlights</div>
+                </div>
+
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-title">Online Dynamic Risk Assessment for Robot Dog Navigation</div>
+                        <p class="project-text">
+                            Designed a multi-layer real-time risk assessment framework using Python and computer vision to evaluate path feasibility and dynamic obstacles for a mobile quadruped robot.
+                        </p>
+                        <span class="project-chip">Python · CV · ROS</span>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">Improvement of Mobile Robots Risk Framework</div>
+                        <p class="project-text">
+                            Extended a ROS-based risk estimation framework by enhancing a probabilistic roadmap planner with dynamic obstacle handling and trajectory-aware navigation logic.
+                        </p>
+                        <span class="project-chip">Navigation · PRM</span>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">Multipurpose Agro System using Swarm Intelligence</div>
+                        <p class="project-text">
+                            Built an autonomous agricultural robot for seed sowing, watering, pesticide spraying, and field surveillance using swarm-intelligence-based path planning and custom embedded firmware.
+                        </p>
+                        <span class="project-chip">IoT · Swarm Robotics</span>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">Other Coursework & Lab Work</div>
+                        <p class="project-text">
+                            Additional lab projects in connected devices, simulation, and embedded software development supporting robust and safe system design.
+                        </p>
+                        <span class="project-chip">Embedded · Simulation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Skills & Strengths</h2>
+                    <div class="section-pill">Technical & interpersonal</div>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="skill-pill">Python</div>
+                    <div class="skill-pill">C / C++</div>
+                    <div class="skill-pill">ROS · ROS2</div>
+                    <div class="skill-pill">Bluetooth LE</div>
+                    <div class="skill-pill">Embedded Systems</div>
+                    <div class="skill-pill">Linux</div>
+                    <div class="skill-pill">MATLAB</div>
+                    <div class="skill-pill">Simulation & Testing</div>
+                </div>
+
+                <div class="skill-bar" style="margin-top: 12px;">
+                    <div class="skill-pill">Adaptability</div>
+                    <div class="skill-pill">Learning Agility</div>
+                    <div class="skill-pill">Cross-Functional Collaboration</div>
+                    <div class="skill-pill">Technical Documentation</div>
+                    <div class="skill-pill">Problem Solving</div>
+                    <div class="skill-pill">Feasibility Assessment</div>
+                    <div class="skill-pill">Project & Time Management</div>
+                </div>
+            </div>
+
+            <!-- Education & Languages -->
+            <div class="section" id="education">
+                <div class="section-header">
+                    <h2>Education & Languages</h2>
+                    <div class="section-pill">Formal training</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">M.Sc. Information Technology (Embedded Systems)</div>
+                    <div class="timeline-meta">University of Stuttgart, Germany · 10/2022 – Present</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">B.E. Electronics & Telecommunications Engineering</div>
+                    <div class="timeline-meta">G.H. Raisoni College of Engineering, Nagpur · 2018 – 2022</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">German Language</div>
+                    <div class="timeline-meta">German Course B1 in progress (since 01/2025) · German level A2/B1</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Languages</div>
+                    <div class="timeline-meta">English (Fluent) · German (Intermediate) · Hindi (Native)</div>
+                </div>
+
+                <p class="note">
+                    Actively looking for roles in embedded systems, robotics, and connected devices – happy to relocate and start immediately.
+                </p>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
