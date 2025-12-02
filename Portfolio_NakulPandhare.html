@@ -1,150 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Nakul Pandhare: Embedded Systems Engineer, Roboticist, BLE Developer, Python Expert. MSc Student, University of Stuttgart.">
-  <meta name="keywords" content="Embedded Systems, Robotics, BLE, Python, Microcontroller, ROS2, Internship, Automation, Real-Time Systems, Portfolio, Stuttgart, Engineer">
-  <title>Nakul Pandhare - Engineer Portfolio</title>
-  <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; background:#f3f3f9; color:#222;}
-    header { background: linear-gradient(90deg, #27539e, #2bc7bb); color: white; padding: 40px 10%;}
-    header h1 { font-size:2.8em; margin:0;}
-    header p {font-size:1.3em; margin:10px 0 0 0;}
-    header p1 {font-size:1.1em; margin:10px 0 0 0;}
-    nav { background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 10px 10%; display:flex; gap:32px;}
-    nav a { text-decoration:none; color:#27539e; font-weight:600; transition:color 0.2s;}
-    nav a:hover { color: #2bc7bb;}
-    section { padding:40px 10%;}
-    h2 { margin-top:0; color:#27539e;}
-    .skills-list, .achievements-list { display:flex; flex-wrap:wrap; gap:14px;}
-    .skills-list div, .achievements-list div {background:#2bc7bb; color:#fff; padding:7px 18px; border-radius:22px; font-weight:500}
-    .timeline {border-left:4px solid #2bc7bb; padding-left:20px; margin-top:30px;}
-    .timeline-entry {margin-bottom:28px;}
-    .projects-grid {display:grid; grid-template-columns:1fr 1fr 1fr; gap:22px;}
-    .project-card {background:#fff; box-shadow:0 2px 10px rgba(39,83,158,0.08); border-radius:14px; padding:16px;}
-    .project-card h4 {margin: 0 0 10px 0;}
-    form {margin-top:28px; background:white; padding:24px; border-radius:16px; max-width:380px;}
-    label {display:block; margin-bottom:6px; color:#27539e;}
-    input, textarea {width:100%; margin-bottom:15px; border-radius:8px; border:1px solid #ccc; padding:9px;}
-    button {background:#2bc7bb; color:white; border:none;border-radius:8px; padding:10px 26px; font-size:1em; cursor:pointer;transition:background 0.2s;}
-    button:hover {background:#27539e;}
-    @media (max-width:900px) {.projects-grid{grid-template-columns:1fr 1fr;}.section{padding:20px 4%;}}
-    @media (max-width:600px) {.projects-grid{grid-template-columns:1fr;}.header,.nav,section{padding:18px 2%;}}
-  </style>
+    <meta charset="UTF-8">
+    <title>Nakul Pandhare – Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #f4f7fa; color: #222; }
+        header { background: #3275be; color: #fff; padding: 32px 24px; text-align: center; }
+        .container { max-width: 900px; margin: 20px auto; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border-radius: 6px; }
+        .section { padding: 28px 32px; border-bottom: 1px solid #e6e6e6; }
+        .section:last-child { border-bottom: none; }
+        h1 { margin: 0; font-size: 2.2em; }
+        h2 { color: #3275be; margin-top: 0; }
+        .info { margin-top: 16px; font-size: 1em; }
+        .contact-list { list-style: none; padding: 0; margin: 0 0 12px 0; }
+        .contact-list li { margin-bottom: 6px; }
+        .skills, .strengths { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0; }
+        .skills span, .strengths span { background: #eaf2fb; padding: 6px 14px; border-radius: 16px; font-size: 0.97em; }
+        .exp-title { font-weight: 600; margin-bottom: 3px; }
+        .project { margin-bottom: 14px; }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Nakul Pandhare</h1>
-    <p> M.Sc. Information technology (INFOTECH), Universität Student </p>
-    <p1>Stuttgart, Germany | +49 176 8596 3167 | <a href="mailto:nakulpandhare23@gmail.com" style="color:#fff;text-decoration:underline;">nakulpandhare23@gmail.com</a></p1>
-  </header>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#achievements">Achievements</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      Hello! I’m an Embedded Systems Engineer with extensive hands-on experience in robotics, BLE development, and microcontroller programming. Proficient in Python, C/C++, and ROS2, I’m deeply passionate about automation, intelligent connectivity, and autonomous navigation. Driven by innovation and precision, I focus on developing safe, efficient, and intelligent embedded solutions that seamlessly bridge the gap between hardware and advanced control systems for modern industrial applications.
-    </p>
-  </section>
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-list">
-      <div>Embedded Systems</div>
-      <div>Bluetooth Low Energy (BLE)</div>
-      <div>Robotics (ROS, ROS2)</div>
-      <div>Microcontrollers: ESP32, Arduino, nRF52</div>
-      <div>Python</div>
-      <div>C/C++</div>
-      <div>Real-Time Systems</div>
-      <div>Linux Programming</div>
-      <div>GitHub</div>
-      <div>VHDL</div>
-      <div>Kotlin</div>
-      <div>Automation</div>
+    <header>
+        <h1>Nakul Pandhare</h1>
+        <div class="info">
+            Embedded Systems & Robotics Engineer<br>
+            Based in Stuttgart, Germany & Nagpur, India
+        </div>
+        <ul class="contact-list">
+            <li>Email: <a href="mailto:nakulpandhare23@gmail.com" style="color:#fff;">nakulpandhare23@gmail.com</a></li>
+            <li>LinkedIn: <a href="https://linkedin.com/in/nakul-pandhare" style="color:#fff;">nakul-pandhare</a></li>
+            <li>GitHub: <a href="https://github.com/nakulpandhare" style="color:#fff;">nakulpandhare</a></li>
+            <li>Phone: +49 176 8596 3167</li>
+        </ul>
+    </header>
+    <div class="container">
+        <section class="section">
+            <h2>Professional Summary</h2>
+            <p>
+                Embedded systems and robotics engineer with hands-on expertise in ROS, BLE development, and microcontroller/microprocessor programming. Focused on automation, intelligent connectivity, and autonomous navigation. Skilled in Python, C/C++, and ROS2, with a strong interest in developing safe, robust, and intelligent embedded solutions.
+            </p>
+        </section>
+        <section class="section">
+            <h2>Education</h2>
+            <ul>
+                <li><strong>M.Sc., Information Technology</strong>, University of Stuttgart, Germany (2022–Present) – Major: Embedded Systems</li>
+                <li><strong>B.E., Electronics & Telecommunications Engineering</strong>, G.H. Raisoni College of Engineering, Nagpur, India (2018–2022)</li>
+                <li><strong>German Course B1</strong> in progress (2025)</li>
+            </ul>
+        </section>
+        <section class="section">
+            <h2>Skills</h2>
+            <div class="skills">
+                <span>Python</span>
+                <span>C/C++</span>
+                <span>ROS & ROS2</span>
+                <span>Bluetooth LE</span>
+                <span>Linux</span>
+                <span>Embedded Systems</span>
+                <span>MATLAB</span>
+                <span>Simulation</span>
+                <span>Software Development</span>
+            </div>
+            <h2>Strengths</h2>
+            <div class="strengths">
+                <span>Adaptability</span>
+                <span>Learning Agility</span>
+                <span>Cross-Functional Collaboration</span>
+                <span>Technical Documentation</span>
+                <span>Problem Solving</span>
+                <span>Feasibility Assessment</span>
+                <span>Project Management</span>
+            </div>
+        </section>
+        <section class="section">
+            <h2>Experience</h2>
+            <div>
+                <div class="exp-title">Andreas Stihl AG & Co. KG, Waiblingen, Germany – Werkstudent Praktikant (2024–Present)</div>
+                Mastered BLE workflows, developed testing applications on Nordic platforms, integrated BLE with Android Kotlin for OTA updates, and documented technical processes.
+            </div>
+            <div>
+                <div class="exp-title">BEC Robotics GmbH, Pfullingen, Germany – Werkstudent Roboticist (2023–2024)</div>
+                Developed and tested AGV systems using ROS2; designed interface layers bridging industrial robots and localization tools; collaborated on automation solutions.
+            </div>
+            <div>
+                <div class="exp-title">ISW Stuttgart Institute for Control Technology – University Research Assistant (2023)</div>
+                Programmed PLC-driven gantry laser scanners for automated inspection, optimized precision algorithms, supported production deployment.
+            </div>
+            <div>
+                <div class="exp-title">Technoventor Innovations Pvt. Ltd, Nagpur – Embedded Product Development Intern (2021–2022)</div>
+                Programmed microcontrollers, integrated sensor-actuator systems, prototyped automation solutions for railway wagon door detection and remote monitoring.
+            </div>
+        </section>
+        <section class="section">
+            <h2>Academic Projects</h2>
+            <div class="project">
+                <strong>Online Dynamic Risk Assessment for Robot Dog Navigation</strong><br>
+                Designed a multi-layer real-time risk framework for mobile robots using Python and computer vision, enabling dynamic obstacle detection and path feasibility evaluation.
+            </div>
+            <div class="project">
+                <strong>Mobile Robots Risk Assessment Framework</strong><br>
+                Advanced probabilistic roadmap planner for navigation, integrated dynamic obstacles tracking in ROS-based frameworks.
+            </div>
+            <div class="project">
+                <strong>Multipurpose Agro System using Swarm Intelligence</strong><br>
+                Built autonomous agricultural robot for seeding, watering, and surveillance, integrating robotics, IoT, and custom firmware on ATmega microcontrollers.
+            </div>
+        </section>
+        <section class="section">
+            <h2>Languages</h2>
+            <ul>
+                <li>English – Fluent</li>
+                <li>German – Intermediate (A2/B1)</li>
+                <li>Hindi – Native</li>
+            </ul>
+        </section>
     </div>
-    <h3>Languages</h3>
-    <div class="skills-list">
-      <div>Hindi (Native)</div>
-      <div>Marathi (Native)</div>
-      <div>English (C1)</div>
-      <div>German (A2)</div>
-    </div>
-  </section>
-  <section id="experience">
-    <h2>Experience</h2>
-    <div class="timeline">
-      <div class="timeline-entry">
-        <strong>ANDREAS STIHL AG & Co. KG</strong> (Jul 2024 - Present)<br>
-        Praktikant (Intern) & Werkstudent (Working Student)<br>
-        Enhanced Bluetooth LE features and product connectivity using nRF52 boards, Kotlin, C/C++, and Python.
-      </div>
-      <div class="timeline-entry">
-        <strong>BEC Robotics GmbH, Pfullingen</strong> (Nov 2023 - Apr 2024)<br>
-        Werkstudent Roboticist<br>
-        Built ROS2 interfaces for data exchange between mobile robots and external localization software.
-      </div>
-      <div class="timeline-entry">
-        <strong>Institute for Control Technology for Machine Tools and Manufacturing Facilities (ISW), Stuttgart University</strong> (Jan 2023 - Sept 2023)<br>
-        Research Assistant (Hiwi)<br>
-        Programmed & optimized Gantry Laser Scanners, tested compensation methods with Beckhoff Twincat PLC.
-      </div>
-      <div class="timeline-entry">
-        <strong>Technoventor Innovations Pvt. Ltd (Fablab), Nagpur</strong> (Dec 2021 - Jun 2022)<br>
-        Embedded Product Development Intern<br>
-        Developed sensor-based solutions on microcontrollers, microprocessors.
-      </div>
-    </div>
-  </section>
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <h4>Online Dynamic Risk-Assessment for Robot Dog Navigation Task </h4>
-        <p>Designed and developed a graph-based risk assessment framework for autonomous navigation of mobile robots.</p>
-      </div>
-      <div class="project-card">
-        <h4>Improvement and Extension of a Mobile Robot's Risk Estimation Framework </h4>
-        <p>Optimized Probabilistic Roadmap Planner (PRM) for autonomous navigation of industrial mobile robots in a dynamic indoor environment.</p>
-      </div>
-      <div class="project-card">
-        <h4>Design and Development of an Autonomous Agriculture Robot</h4>
-        <p>Designed and programmed an Arduino-controlled robot for seed sowing, spraying, and watering tasks.</p>
-      </div>
-      <div class="project-card">
-        <h4>Wagon Train Open Door Detection (Indian Central Railways)</h4>
-        <p>Developed a proof-of-concept using Arduino to detect open wagon doors, improving railway safety protocols.</p>
-      </div>
-    </div>
-  </section>
-  <section id="achievements">
-    <h2>Achievements</h2>
-    <div class="achievements-list">
-      <div>Best Paper Award, IEEE ICCICA 2021 (Multipurpose Agro System Using Swarm Intelligence)</div>
-      <div>Top 30 Ideas, IISF 2021 (Agriculture Project Nationwide)</div>
-      <div>Chair, IETE Student Forum, GHRCE, Nagpur</div>
-    </div>
-  </section>
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <form name="contact" action="mailto:nakulpandhare23@gmail.com" method="POST" enctype="text/plain">
-      <label for="name">Name</label>
-      <input required type="text" id="name" name="name">
-      <label for="email">Email</label>
-      <input required type="email" id="email" name="email">
-      <label for="message">Message</label>
-      <textarea required id="message" name="message" rows="4"></textarea>
-      <button type="submit">Send</button>
-    </form>
-    <p>Connect with me: 
-      <a href="https://linkedin.com/in/nakul-pandhare" target="_blank">LinkedIn</a>
-    </p>
-  </section>
 </body>
 </html>
