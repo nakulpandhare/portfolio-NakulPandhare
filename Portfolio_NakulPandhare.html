@@ -2,17 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Nakul Pandhare – Portfolio</title>
+    <title>Nakul Pandhare – Interactive Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
         :root {
-            --bg: #0f172a;
-            --bg-card: #020617;
+            --bg: #050816;
+            --bg-soft: #0b1020;
+            --card: #0f172a;
             --accent: #38bdf8;
-            --accent-soft: rgba(56, 189, 248, 0.15);
-            --text-main: #e5e7eb;
+            --accent-2: #f97316;
+            --text-main: #f9fafb;
             --text-muted: #9ca3af;
-            --border-subtle: #1f2937;
+            --border: #1f2937;
+        }
+
+        [data-theme="light"] {
+            --bg: #f3f4f6;
+            --bg-soft: #e5e7eb;
+            --card: #ffffff;
+            --accent: #2563eb;
+            --accent-2: #ea580c;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border: #d1d5db;
         }
 
         * {
@@ -23,25 +35,33 @@
         body {
             margin: 0;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top left, #1e3a8a 0, #020617 45%, #020617 100%);
+            background:
+                radial-gradient(circle at 0% 0%, rgba(56,189,248,0.2), transparent 60%),
+                radial-gradient(circle at 100% 0%, rgba(248,250,252,0.05), transparent 55%),
+                var(--bg);
             color: var(--text-main);
+            transition: background 0.4s ease, color 0.3s ease;
         }
 
         a { color: var(--accent); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
-        /* Top navigation */
+        /* Navbar */
         .navbar {
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 100;
             backdrop-filter: blur(16px);
-            background: linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.6));
-            border-bottom: 1px solid rgba(148,163,184,0.15);
+            background: linear-gradient(to right, rgba(5,8,22,0.96), rgba(5,8,22,0.82));
+            border-bottom: 1px solid rgba(148,163,184,0.25);
+        }
+
+        [data-theme="light"] .navbar {
+            background: rgba(243,244,246,0.9);
         }
 
         .nav-inner {
-            max-width: 1040px;
+            max-width: 1080px;
             margin: 0 auto;
             padding: 10px 20px;
             display: flex;
@@ -49,17 +69,29 @@
             justify-content: space-between;
         }
 
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 20%, #f97316, #22c55e, #2563eb);
+            border: 2px solid rgba(15,23,42,0.8);
+            box-shadow: 0 0 0 3px rgba(15,23,42,0.7);
+        }
+
         .nav-name {
             font-weight: 600;
-            letter-spacing: 0.08em;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
         .nav-links a {
-            margin-left: 18px;
-            font-size: 0.9rem;
+            margin-left: 16px;
+            font-size: 0.88rem;
             position: relative;
         }
 
@@ -70,7 +102,7 @@
             bottom: -4px;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #38bdf8, #a855f7);
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
             transition: width 0.25s ease-out;
         }
 
@@ -78,31 +110,63 @@
             width: 100%;
         }
 
-        /* Layout */
-        .page {
-            max-width: 1040px;
-            margin: 24px auto 40px auto;
-            padding: 0 20px 40px;
-            display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr);
-            gap: 26px;
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        @media (max-width: 840px) {
+        .small-btn {
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.5);
+            padding: 4px 10px;
+            font-size: 0.78rem;
+            background: rgba(15,23,42,0.9);
+            color: var(--text-main);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        [data-theme="light"] .small-btn {
+            background: #ffffff;
+        }
+
+        .small-btn span {
+            font-size: 0.9rem;
+        }
+
+        /* Layout */
+        .page {
+            max-width: 1080px;
+            margin: 24px auto 40px;
+            padding: 0 18px 40px;
+            display: grid;
+            gap: 26px;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr);
+        }
+
+        @media (max-width: 900px) {
             .page {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Left column (intro card) */
+        /* Hero card */
         .card {
-            background: radial-gradient(circle at top left, rgba(56,189,248,0.18), rgba(15,23,42,0.98));
-            border-radius: 18px;
-            padding: 22px 22px 20px;
-            border: 1px solid rgba(148,163,184,0.25);
-            box-shadow: 0 22px 45px rgba(15,23,42,0.75);
+            background: radial-gradient(circle at 0% 0%, rgba(56,189,248,0.2), rgba(15,23,42,1));
+            border-radius: 20px;
+            padding: 22px 22px 18px;
+            border: 1px solid rgba(148,163,184,0.3);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 24px 45px rgba(15,23,42,0.8);
+        }
+
+        [data-theme="light"] .card {
+            background: linear-gradient(135deg, #ffffff, #eff6ff);
+            box-shadow: 0 16px 35px rgba(148,163,184,0.4);
         }
 
         .card::before {
@@ -110,11 +174,11 @@
             position: absolute;
             inset: -40%;
             background:
-                radial-gradient(circle at 10% 0%, rgba(56,189,248,0.10), transparent 55%),
-                radial-gradient(circle at 90% 100%, rgba(168,85,247,0.16), transparent 60%);
+                radial-gradient(circle at 10% 0%, rgba(56,189,248,0.18), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(248,113,113,0.28), transparent 60%);
             opacity: 0;
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            transform: scale(1.05);
+            transform: scale(1.06);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
             pointer-events: none;
         }
 
@@ -123,126 +187,197 @@
             transform: scale(1.03);
         }
 
-        .tagline {
+        .greeting-pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.8rem;
-            padding: 4px 10px;
+            padding: 4px 11px;
             border-radius: 999px;
-            border: 1px solid rgba(148,163,184,0.4);
-            background: rgba(15,23,42,0.7);
+            border: 1px solid rgba(148,163,184,0.5);
+            background: rgba(15,23,42,0.85);
+            font-size: 0.78rem;
+            cursor: pointer;
             color: var(--text-muted);
         }
 
-        .dot {
-            width: 7px;
-            height: 7px;
+        [data-theme="light"] .greeting-pill {
+            background: rgba(255,255,255,0.9);
+        }
+
+        .dot-online {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #22c55e;
             box-shadow: 0 0 0 6px rgba(34,197,94,0.25);
         }
 
-        h1 {
-            margin: 14px 0 4px;
-            font-size: 2rem;
+        .wave {
+            display: inline-block;
+            transform-origin: 70% 70%;
+            animation: wave 2.4s infinite;
         }
 
-        .subtitle {
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            15% { transform: rotate(14deg); }
+            30% { transform: rotate(-8deg); }
+            40% { transform: rotate(14deg); }
+            50% { transform: rotate(-4deg); }
+            60% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        h1 {
+            margin: 14px 0 6px;
+            font-size: 2.2rem;
+        }
+
+        .hero-title-line {
+            font-size: 1rem;
             color: var(--text-muted);
-            font-size: 0.94rem;
             max-width: 480px;
         }
 
+        .hero-highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
         .chips-row {
-            margin-top: 14px;
+            margin-top: 16px;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
 
         .chip {
-            font-size: 0.78rem;
-            padding: 5px 10px;
+            font-size: 0.8rem;
+            padding: 5px 11px;
             border-radius: 999px;
+            background: rgba(15,23,42,0.95);
             border: 1px solid rgba(148,163,184,0.5);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        [data-theme="light"] .chip {
+            background: #ffffff;
+        }
+
+        .chip-emoji {
+            font-size: 0.9rem;
+        }
+
+        .hero-buttons {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-primary, .btn-secondary {
+            border-radius: 999px;
+            padding: 7px 16px;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #0b1120;
+            font-weight: 600;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(148,163,184,0.5);
+            color: var(--text-main);
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary:hover {
             background: rgba(15,23,42,0.8);
+        }
+
+        [data-theme="light"] .btn-secondary:hover {
+            background: #f3f4f6;
         }
 
         .contact-grid {
             margin-top: 18px;
             padding-top: 14px;
-            border-top: 1px solid rgba(148,163,184,0.3);
+            border-top: 1px dashed rgba(148,163,184,0.5);
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px 16px;
-            font-size: 0.84rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 18px;
+            font-size: 0.86rem;
         }
 
-        @media (max-width: 840px) {
+        @media (max-width: 900px) {
             .contact-grid {
                 grid-template-columns: 1fr;
             }
         }
 
         .contact-label {
-            color: var(--text-muted);
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
         }
 
-        /* Fun element: floating badges */
-        .float-badge {
+        .fun-badge {
             position: absolute;
-            right: 18px;
-            top: 18px;
-            padding: 6px 11px;
+            right: 16px;
+            bottom: 16px;
+            padding: 6px 10px;
             border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.5);
             font-size: 0.72rem;
-            background: rgba(15,23,42,0.85);
-            border: 1px solid rgba(148,163,184,0.45);
+            background: rgba(15,23,42,0.9);
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            animation: float 5s ease-in-out infinite;
+            animation: pulse 2.4s infinite;
         }
 
-        .float-badge span {
-            font-size: 0.8rem;
+        [data-theme="light"] .fun-badge {
+            background: rgba(255,255,255,0.9);
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0px); }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
         }
 
         /* Right column sections */
+        .column-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
         .section {
-            background: linear-gradient(135deg, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
-            border-radius: 16px;
-            padding: 18px 20px 16px;
-            border: 1px solid rgba(148,163,184,0.2);
-            margin-bottom: 14px;
+            background: var(--bg-soft);
+            border-radius: 18px;
+            padding: 16px 18px 14px;
+            border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
         }
 
-        .section::before {
-            content: "";
-            position: absolute;
-            inset: -30%;
-            background: radial-gradient(circle at 0% 0%, rgba(56,189,248,0.16), transparent 55%);
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            pointer-events: none;
-        }
-
-        .section:hover::before {
-            opacity: 1;
-            transform: translateY(0px);
+        [data-theme="light"] .section {
+            background: var(--card);
         }
 
         .section-header {
@@ -253,43 +388,75 @@
         }
 
         .section h2 {
-            margin: 0;
-            font-size: 1rem;
-            letter-spacing: 0.08em;
+            font-size: 0.95rem;
             text-transform: uppercase;
+            letter-spacing: 0.12em;
             color: var(--text-muted);
+            margin: 0;
         }
 
-        .section-pill {
-            font-size: 0.7rem;
-            padding: 3px 9px;
+        .section-tag {
+            font-size: 0.72rem;
+            padding: 3px 8px;
             border-radius: 999px;
-            background: rgba(15,23,42,1);
-            border: 1px solid rgba(148,163,184,0.35);
+            border: 1px solid rgba(148,163,184,0.5);
             color: var(--text-muted);
         }
 
         .timeline-item {
-            margin-bottom: 10px;
+            border-radius: 12px;
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+
+        .timeline-item:hover {
+            background: rgba(15,23,42,0.75);
+            transform: translateY(-1px);
+        }
+
+        [data-theme="light"] .timeline-item:hover {
+            background: #e5e7eb;
         }
 
         .timeline-title {
             font-weight: 600;
-            font-size: 0.94rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
         }
 
         .timeline-meta {
             font-size: 0.78rem;
             color: var(--text-muted);
-            margin-bottom: 3px;
+            margin-top: 2px;
         }
 
         .timeline-body {
-            font-size: 0.86rem;
-            color: #d1d5db;
+            font-size: 0.84rem;
+            color: #e5e7eb;
+            margin-top: 6px;
+            display: none;
         }
 
-        .skill-tags {
+        [data-theme="light"] .timeline-body {
+            color: #111827;
+        }
+
+        .timeline-item.open .timeline-body {
+            display: block;
+        }
+
+        .toggle-icon {
+            font-size: 0.78rem;
+            color: var(--accent);
+        }
+
+        .skill-line {
             display: flex;
             flex-wrap: wrap;
             gap: 7px;
@@ -297,50 +464,15 @@
         }
 
         .skill-tag {
-            font-size: 0.78rem;
-            padding: 4px 8px;
+            font-size: 0.74rem;
+            padding: 3px 7px;
             border-radius: 999px;
-            background: rgba(15,23,42,1);
-            border: 1px solid rgba(148,163,184,0.4);
+            border: 1px solid rgba(148,163,184,0.5);
         }
 
-        /* Interactive skills bar */
-        .skill-bar {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .skill-pill {
-            position: relative;
-            padding: 5px 11px;
-            border-radius: 999px;
-            background: rgba(15,23,42,1);
-            border: 1px solid rgba(148,163,184,0.4);
-            font-size: 0.8rem;
-            overflow: hidden;
-            cursor: default;
-        }
-
-        .skill-pill::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg, rgba(56,189,248,0.16), transparent 50%, rgba(56,189,248,0.2));
-            transform: translateX(-100%);
-            transition: transform 0.35s ease-out;
-            opacity: 0.9;
-        }
-
-        .skill-pill:hover::after {
-            transform: translateX(0%);
-        }
-
-        /* Project grid */
         .project-grid {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
         }
 
@@ -353,93 +485,183 @@
         .project-card {
             position: relative;
             border-radius: 14px;
-            padding: 12px 12px 11px;
-            background: radial-gradient(circle at top left, rgba(56,189,248,0.16), rgba(15,23,42,0.98));
-            border: 1px solid rgba(148,163,184,0.3);
+            padding: 10px 11px 9px;
+            background: linear-gradient(135deg, rgba(15,23,42,0.96), rgba(15,23,42,0.9));
+            border: 1px solid rgba(148,163,184,0.4);
             overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
 
-        .project-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(15,23,42,0.7));
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(15,23,42,0.75);
         }
 
-        .project-card:hover::before {
-            opacity: 1;
-            transform: translateY(0px);
+        [data-theme="light"] .project-card {
+            background: linear-gradient(135deg, #ffffff, #eff6ff);
         }
 
         .project-title {
-            position: relative;
+            font-size: 0.88rem;
             font-weight: 600;
-            font-size: 0.92rem;
         }
 
         .project-text {
-            position: relative;
-            margin-top: 4px;
-            font-size: 0.82rem;
-            color: #d1d5db;
+            font-size: 0.8rem;
+            margin-top: 3px;
+            color: #e5e7eb;
+        }
+
+        [data-theme="light"] .project-text {
+            color: #111827;
         }
 
         .project-chip {
-            position: relative;
             display: inline-block;
             margin-top: 6px;
-            font-size: 0.74rem;
-            padding: 3px 8px;
+            font-size: 0.72rem;
+            padding: 3px 7px;
             border-radius: 999px;
-            background: rgba(15,23,42,0.9);
+            background: rgba(15,23,42,0.95);
             border: 1px solid rgba(148,163,184,0.5);
         }
 
-        /* Footer note */
+        [data-theme="light"] .project-chip {
+            background: #ffffff;
+        }
+
+        .skill-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .skill-pill {
+            position: relative;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15,23,42,0.95);
+            border: 1px solid rgba(148,163,184,0.5);
+            font-size: 0.78rem;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .skill-pill {
+            background: #ffffff;
+        }
+
+        .skill-pill::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, rgba(56,189,248,0.25), transparent 60%);
+            transform: translateX(-100%);
+            opacity: 0.9;
+            transition: transform 0.35s ease-out;
+        }
+
+        .skill-pill:hover::after {
+            transform: translateX(0%);
+        }
+
         .note {
             font-size: 0.78rem;
             color: var(--text-muted);
             margin-top: 6px;
         }
+
+        /* Toast (for fun interactions) */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%) translateY(120%);
+            background: #0f172a;
+            color: #f9fafb;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            border: 1px solid rgba(148,163,184,0.6);
+            box-shadow: 0 10px 25px rgba(15,23,42,0.65);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.35s ease, opacity 0.35s ease;
+            z-index: 200;
+        }
+
+        [data-theme="light"] .toast {
+            background: #111827;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0%);
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 640px) {
+            h1 { font-size: 1.8rem; }
+            .hero-title-line { font-size: 0.92rem; }
+        }
     </style>
 </head>
-<body>
+<body data-theme="dark">
     <div class="navbar">
         <div class="nav-inner">
-            <div class="nav-name">Nakul Pandhare · Embedded Systems</div>
+            <div class="nav-left">
+                <div class="nav-avatar"></div>
+                <div class="nav-name">Nakul Pandhare</div>
+            </div>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#experience">Experience</a>
                 <a href="#projects">Projects</a>
                 <a href="#education">Education</a>
             </div>
+            <div class="nav-actions">
+                <button class="small-btn" id="themeToggle">
+                    <span>🌗</span> Theme
+                </button>
+            </div>
         </div>
     </div>
 
     <main class="page">
-        <!-- Left column -->
+        <!-- Left: Hero / About -->
         <section class="card" id="about">
-            <div class="float-badge">
-                ⚙️ <span>Robotics · Embedded · BLE</span>
+            <div class="greeting-pill" id="greetingToggle">
+                <span class="dot-online"></span>
+                <span id="greetingText"><span class="wave">👋</span> Hi, I’m Nakul. Tap me!</span>
             </div>
-            <div class="tagline">
-                <span class="dot"></span>
-                Open to embedded & robotics roles in EU/India
-            </div>
-            <h1>Nakul Pandhare</h1>
-            <p class="subtitle">
-                Embedded systems and robotics engineer with hands-on experience in ROS, BLE, and microcontroller/microprocessor programming, focused on automation, intelligent connectivity, and autonomous navigation.
+
+            <h1>Embedded Systems & Robotics Engineer</h1>
+            <p class="hero-title-line">
+                Designing <span class="hero-highlight">safe, connected, and intelligent</span> systems with ROS, BLE, and microcontrollers – and always curious about the next problem to solve.
             </p>
 
             <div class="chips-row">
-                <div class="chip">ROS · ROS2</div>
-                <div class="chip">Bluetooth LE</div>
-                <div class="chip">Python · C/C++</div>
-                <div class="chip">Embedded Systems</div>
-                <div class="chip">Autonomous Navigation</div>
+                <div class="chip">
+                    <span class="chip-emoji">🤖</span> ROS & autonomous navigation
+                </div>
+                <div class="chip">
+                    <span class="chip-emoji">📡</span> Bluetooth LE & connected devices
+                </div>
+                <div class="chip">
+                    <span class="chip-emoji">🧪</span> Prototyping and testing
+                </div>
+                <div class="chip">
+                    <span class="chip-emoji">🌍</span> Open to EU & India roles
+                </div>
+            </div>
+
+            <div class="hero-buttons">
+                <button class="btn-primary" id="sayHiBtn">
+                    👋 Say hi
+                </button>
+                <button class="btn-secondary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+                    View projects
+                </button>
             </div>
 
             <div class="contact-grid">
@@ -465,71 +687,87 @@
                 </div>
                 <div>
                     <div class="contact-label">Availability</div>
-                    <div>Eligible to work in Germany & India · Immediate start</div>
+                    <div>Eligible in Germany & India · Immediate</div>
                 </div>
+            </div>
+
+            <div class="fun-badge">
+                🎯 <span>Let’s build something smart.</span>
             </div>
         </section>
 
-        <!-- Right column -->
-        <section class="right">
+        <!-- Right: Content -->
+        <section class="column-right">
             <!-- Experience -->
             <div class="section" id="experience">
                 <div class="section-header">
                     <h2>Experience</h2>
-                    <div class="section-pill">Hands-on industry projects</div>
+                    <div class="section-tag">Tap cards to read details</div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-title">Werkstudent Praktikant · Andreas Stihl AG & Co. KG</div>
+                    <div class="timeline-title">
+                        Werkstudent · Andreas Stihl AG &amp; Co. KG
+                        <span class="toggle-icon">＋</span>
+                    </div>
                     <div class="timeline-meta">Waiblingen, Germany · 07/2024 – Present</div>
-                    <p class="timeline-body">
-                        Built and tested BLE communication workflows on Nordic nRF52/nRF54 platforms, implemented secure pairing, data exchange, and OTA update validation using Python and C/C++.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Bluetooth LE</span>
-                        <span class="skill-tag">Nordic nRF52/nRF54</span>
-                        <span class="skill-tag">Zephyr RTOS</span>
-                        <span class="skill-tag">Android (Kotlin)</span>
+                    <div class="timeline-body">
+                        Built and tested BLE communication workflows on Nordic nRF52/nRF54 platforms, implementing secure pairing, encrypted data exchange, and OTA update validation using Python and C/C++.
+                        <div class="skill-line">
+                            <span class="skill-tag">Bluetooth LE</span>
+                            <span class="skill-tag">Nordic nRF52/nRF54</span>
+                            <span class="skill-tag">Zephyr RTOS</span>
+                            <span class="skill-tag">Android (Kotlin)</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-title">Werkstudent Roboticist · BEC Robotics GmbH</div>
+                    <div class="timeline-title">
+                        Werkstudent Roboticist · BEC Robotics GmbH
+                        <span class="toggle-icon">＋</span>
+                    </div>
                     <div class="timeline-meta">Pfullingen, Germany · 11/2023 – 04/2024</div>
-                    <p class="timeline-body">
-                        Contributed to ROS2-based AGV development, designed C++ interface layers between industrial mobile robots and external localization/simulation tools, and conducted end-to-end navigation tests.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">ROS2</span>
-                        <span class="skill-tag">AGV Systems</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">Simulation</span>
+                    <div class="timeline-body">
+                        Contributed to a ROS2-based AGV platform, created C++ interface layers to bridge industrial mobile robots with localization/simulation tools, and ran end-to-end navigation tests for production readiness.
+                        <div class="skill-line">
+                            <span class="skill-tag">ROS2</span>
+                            <span class="skill-tag">AGV Systems</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">Simulation</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-title">Research Assistant (HiWi) · ISW, University of Stuttgart</div>
+                    <div class="timeline-title">
+                        Research Assistant (HiWi) · ISW, Univ. of Stuttgart
+                        <span class="toggle-icon">＋</span>
+                    </div>
                     <div class="timeline-meta">Stuttgart, Germany · 01/2023 – 09/2023</div>
-                    <p class="timeline-body">
-                        Programmed and optimized PLC-driven gantry laser scanners using Beckhoff TwinCAT to improve precision in automated inspection workflows and evaluated compensation algorithms via simulation and hardware tests.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">PLC</span>
-                        <span class="skill-tag">TwinCAT</span>
-                        <span class="skill-tag">Automation</span>
+                    <div class="timeline-body">
+                        Programmed and optimized PLC-driven gantry laser scanners using Beckhoff TwinCAT to enhance precision in automated inspection workflows and evaluated compensation algorithms via simulation and hardware tests.
+                        <div class="skill-line">
+                            <span class="skill-tag">PLC</span>
+                            <span class="skill-tag">TwinCAT</span>
+                            <span class="skill-tag">Automation</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-title">Embedded Product Development Intern · Technoventor Innovations</div>
+                    <div class="timeline-title">
+                        Embedded Product Development Intern · Technoventor
+                        <span class="toggle-icon">＋</span>
+                    </div>
                     <div class="timeline-meta">Nagpur, India · 12/2021 – 06/2022</div>
-                    <p class="timeline-body">
-                        Developed microcontroller-based prototypes for railway wagon door detection and remote monitoring, integrating sensors, RF communication, and real-time data streams.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Embedded C</span>
-                        <span class="skill-tag">Sensors & Actuators</span>
-                        <span class="skill-tag">RF Communication</span>
+                    <div class="timeline-body">
+                        Developed microcontroller-based prototypes for railway wagon door detection and remote monitoring, integrating sensors, RF communication, and real-time data pipelines.
+                        <div class="skill-line">
+                            <span class="skill-tag">Embedded C</span>
+                            <span class="skill-tag">Sensors &amp; Actuators</span>
+                            <span class="skill-tag">RF Communication</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -537,41 +775,41 @@
             <!-- Projects -->
             <div class="section" id="projects">
                 <div class="section-header">
-                    <h2>Academic Projects</h2>
-                    <div class="section-pill">Selected highlights</div>
+                    <h2>Projects</h2>
+                    <div class="section-tag">Hover or tap to explore</div>
                 </div>
 
                 <div class="project-grid">
-                    <div class="project-card">
-                        <div class="project-title">Online Dynamic Risk Assessment for Robot Dog Navigation</div>
-                        <p class="project-text">
-                            Designed a multi-layer real-time risk assessment framework using Python and computer vision to evaluate path feasibility and dynamic obstacles for a mobile quadruped robot.
-                        </p>
-                        <span class="project-chip">Python · CV · ROS</span>
+                    <div class="project-card" data-toast="Robot dog risk assessment – cool CV + robotics combo.">
+                        <div class="project-title">Dynamic Risk Assessment for Robot Dog Navigation</div>
+                        <div class="project-text">
+                            Multi-layer real-time risk evaluation framework using Python and computer vision to assess path feasibility and obstacles for a quadruped robot.
+                        </div>
+                        <div class="project-chip">Python · CV · ROS</div>
                     </div>
 
-                    <div class="project-card">
-                        <div class="project-title">Improvement of Mobile Robots Risk Framework</div>
-                        <p class="project-text">
-                            Extended a ROS-based risk estimation framework by enhancing a probabilistic roadmap planner with dynamic obstacle handling and trajectory-aware navigation logic.
-                        </p>
-                        <span class="project-chip">Navigation · PRM</span>
+                    <div class="project-card" data-toast="Advanced navigation logic with dynamic obstacles.">
+                        <div class="project-title">Mobile Robots Risk Framework – Extension</div>
+                        <div class="project-text">
+                            Extended a ROS-based risk estimation framework by enhancing a probabilistic roadmap planner with dynamic obstacle handling and trajectory awareness.
+                        </div>
+                        <div class="project-chip">Navigation · PRM</div>
                     </div>
 
-                    <div class="project-card">
-                        <div class="project-title">Multipurpose Agro System using Swarm Intelligence</div>
-                        <p class="project-text">
-                            Built an autonomous agricultural robot for seed sowing, watering, pesticide spraying, and field surveillance using swarm-intelligence-based path planning and custom embedded firmware.
-                        </p>
-                        <span class="project-chip">IoT · Swarm Robotics</span>
+                    <div class="project-card" data-toast="Agritech + robotics – great conversation starter.">
+                        <div class="project-title">Multipurpose Agro System with Swarm Intelligence</div>
+                        <div class="project-text">
+                            Built an autonomous agricultural robot for seed sowing, watering, pesticide spraying, and surveillance, driven by swarm-intelligence-based path planning.
+                        </div>
+                        <div class="project-chip">IoT · Swarm Robotics</div>
                     </div>
 
-                    <div class="project-card">
-                        <div class="project-title">Other Coursework & Lab Work</div>
-                        <p class="project-text">
-                            Additional lab projects in connected devices, simulation, and embedded software development supporting robust and safe system design.
-                        </p>
-                        <span class="project-chip">Embedded · Simulation</span>
+                    <div class="project-card" data-toast="Showcases breadth: embedded, simulation, and testing.">
+                        <div class="project-title">Coursework & Lab Work Highlights</div>
+                        <div class="project-text">
+                            Additional lab projects in connected devices, simulation, and embedded development focused on robustness, safety, and test-driven workflows.
+                        </div>
+                        <div class="project-chip">Embedded · Simulation</div>
                     </div>
                 </div>
             </div>
@@ -580,10 +818,9 @@
             <div class="section">
                 <div class="section-header">
                     <h2>Skills & Strengths</h2>
-                    <div class="section-pill">Technical & interpersonal</div>
+                    <div class="section-tag">Hover for a subtle shine</div>
                 </div>
-
-                <div class="skill-bar">
+                <div class="skill-pill-row">
                     <div class="skill-pill">Python</div>
                     <div class="skill-pill">C / C++</div>
                     <div class="skill-pill">ROS · ROS2</div>
@@ -593,8 +830,7 @@
                     <div class="skill-pill">MATLAB</div>
                     <div class="skill-pill">Simulation & Testing</div>
                 </div>
-
-                <div class="skill-bar" style="margin-top: 12px;">
+                <div class="skill-pill-row" style="margin-top: 10px;">
                     <div class="skill-pill">Adaptability</div>
                     <div class="skill-pill">Learning Agility</div>
                     <div class="skill-pill">Cross-Functional Collaboration</div>
@@ -605,38 +841,128 @@
                 </div>
             </div>
 
-            <!-- Education & Languages -->
+            <!-- Education -->
             <div class="section" id="education">
                 <div class="section-header">
                     <h2>Education & Languages</h2>
-                    <div class="section-pill">Formal training</div>
+                    <div class="section-tag">Formal training</div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-title">M.Sc. Information Technology (Embedded Systems)</div>
+                <div class="timeline-item open">
+                    <div class="timeline-title">
+                        M.Sc. Information Technology (Embedded Systems)
+                        <span class="toggle-icon">＋</span>
+                    </div>
                     <div class="timeline-meta">University of Stuttgart, Germany · 10/2022 – Present</div>
+                    <div class="timeline-body">
+                        Focus on embedded systems, robotics, connected devices, and software development workflows with strong emphasis on hands-on projects.
+                    </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-title">B.E. Electronics & Telecommunications Engineering</div>
+                    <div class="timeline-title">
+                        B.E. Electronics &amp; Telecommunications Engineering
+                        <span class="toggle-icon">＋</span>
+                    </div>
                     <div class="timeline-meta">G.H. Raisoni College of Engineering, Nagpur · 2018 – 2022</div>
+                    <div class="timeline-body">
+                        Built a strong foundation in electronics, communication, and control systems; completed multiple projects combining hardware and software.
+                    </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-title">German Language</div>
-                    <div class="timeline-meta">German Course B1 in progress (since 01/2025) · German level A2/B1</div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-title">Languages</div>
-                    <div class="timeline-meta">English (Fluent) · German (Intermediate) · Hindi (Native)</div>
+                    <div class="timeline-title">
+                        Languages
+                        <span class="toggle-icon">＋</span>
+                    </div>
+                    <div class="timeline-meta">German Course B1 in progress · Since 01/2025</div>
+                    <div class="timeline-body">
+                        English (Fluent) · German (Intermediate, A2/B1) · Hindi (Native).
+                    </div>
                 </div>
 
                 <p class="note">
-                    Actively looking for roles in embedded systems, robotics, and connected devices – happy to relocate and start immediately.
+                    Open to roles in embedded systems, robotics, and connected devices – remote or on-site, and happy to relocate.
                 </p>
             </div>
         </section>
     </main>
+
+    <div class="toast" id="toast">Thanks for checking this out 👀</div>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const rootBody = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            const current = rootBody.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            rootBody.setAttribute('data-theme', next);
+            showToast(next === 'dark' ? 'Dark mode activated 🌙' : 'Light mode activated ☀️');
+        });
+
+        // Greeting toggle: cycle between a few human lines
+        const greetings = [
+            "👋 Hi, I’m Nakul. Tap me!",
+            "🤝 Nice to meet you. Let’s talk embedded.",
+            "🚀 Always up for building something new.",
+            "🧠 Curious mind, hands-on engineer."
+        ];
+        let greetingIndex = 0;
+        const greetingToggle = document.getElementById('greetingToggle');
+        const greetingText = document.getElementById('greetingText');
+
+        greetingToggle.addEventListener('click', () => {
+            greetingIndex = (greetingIndex + 1) % greetings.length;
+            greetingText.textContent = greetings[greetingIndex];
+        });
+
+        // Expandable experience + education
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const open = item.classList.contains('open');
+                if (item.parentElement && item.parentElement.id !== 'education') {
+                    // For experience you can keep multiple open, so just toggle
+                    item.classList.toggle('open');
+                } else {
+                    // For education section: only one open at a time
+                    if (item.parentElement && item.parentElement.id === 'education') {
+                        item.parentElement.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('open'));
+                        item.classList.add('open');
+                    }
+                }
+                const icon = item.querySelector('.toggle-icon');
+                if (icon) icon.textContent = item.classList.contains('open') ? '－' : '＋';
+            });
+        });
+
+        // Toast helper
+        const toastEl = document.getElementById('toast');
+        let toastTimeout;
+        function showToast(message) {
+            if (!toastEl) return;
+            toastEl.textContent = message;
+            toastEl.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toastEl.classList.remove('show');
+            }, 2200);
+        }
+
+        // Say hi button interaction
+        const sayHiBtn = document.getElementById('sayHiBtn');
+        sayHiBtn.addEventListener('click', () => {
+            showToast("You can reach me at: nakulpandhare23@gmail.com ✉️");
+        });
+
+        // Project card micro-interaction
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const msg = card.getAttribute('data-toast');
+                if (msg) showToast(msg);
+            });
+        });
+    </script>
 </body>
 </html>
