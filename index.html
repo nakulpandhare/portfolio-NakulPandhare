@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <title>Nakul Pandhare</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -79,10 +80,10 @@
     }
 
     .name {
-      font-size: 4.0rem;
-      font-weight: 800;
-      letter-spacing: 0.20em;
-      text-transform: uppercase;
+      font-family: 'Dancing Script', cursive;
+      font-size: 4.2rem;
+      font-weight: 700;
+      line-height: 1.1;
       background: linear-gradient(120deg, #e5e7eb, #30c1ff, #1dcaff);
       -webkit-background-clip: text;
       background-clip: text;
@@ -91,10 +92,12 @@
     }
 
     .tagline {
-      font-size: 0.95rem;
+      font-family: 'Space Grotesk', 'Poppins', sans-serif;
+      font-size: 1.05rem;
       color: #9ca3af;
       max-width: 420px;
       margin: 0 auto;
+      font-weight: 400;
     }
 
     .cta {
@@ -102,12 +105,13 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 9px 20px;
+      padding: 12px 24px;
       border-radius: 999px;
       border: none;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
       color: #020617;
       background: linear-gradient(135deg, #38bdf8, #f97316);
       box-shadow: 0 12px 28px rgba(15,23,42,0.9);
@@ -123,18 +127,28 @@
     }
 
     .cta span {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
     }
 
     .hint {
       margin-top: 6px;
       font-size: 0.8rem;
       color: #6b7280;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
     @media (max-width: 600px) {
       .name {
-        font-size: 2.2rem;
+        font-size: 2.8rem;
+      }
+      
+      .tagline {
+        font-size: 0.95rem;
+      }
+      
+      .hero {
+        gap: 14px;
+        padding: 20px 16px;
       }
     }
   </style>
@@ -148,7 +162,7 @@
       <img src="image.png" alt="Portrait of Nakul Pandhare" />
     </div>
 
-    <div class="name">NAKUL PANDHARE</div>
+    <div class="name">Nakul Pandhare</div>
 
     <p class="tagline">
       Embedded Systems & Robotics Engineer crafting safe, connected, and intelligent systems.
